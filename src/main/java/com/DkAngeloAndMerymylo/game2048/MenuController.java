@@ -4,6 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,10 +20,19 @@ import javafx.scene.Scene;
 public class MenuController {
 
     @FXML
+    public AnchorPane anchorPane;
+    @FXML
     private ChoiceBox<String> gridSizeChoiceBox;
     @FXML
     public void initialize() {
+        Stop[] stops = new Stop[] {
+                new Stop(0, Color.BEIGE),
+                new Stop(1, Color.DARKORANGE)
+        };
+        LinearGradient linearGradient = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
+        BackgroundFill backgroundFill = new BackgroundFill(linearGradient, CornerRadii.EMPTY, Insets.EMPTY);
 
+        anchorPane.setBackground(new Background(backgroundFill));
         // Imposta gli elementi nella ChoiceBox
         gridSizeChoiceBox.setItems(FXCollections.observableArrayList("4x4", "5x5", "6x6"));
         gridSizeChoiceBox.setValue("4x4"); // Imposta il valore predefinito
